@@ -1,75 +1,130 @@
-'use client'
-import { Box, Stack, TextField, Button } from "@mui/material";
+"use client";
+import {
+ AppBar,
+ Box,
+ TextField,
+ Button,
+ Dialog,
+ DialogActions,
+ DialogTitle,
+ DialogContent,
+ DialogContentText,
+ Toolbar,
+ Typography,
+} from "@mui/material";
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
+import Chatbot from "./chatbot/page";
 
 export default function Home() {
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content: "Hi! I am the Rate My Professor assistant how may i help you"
-    }
-  ])
-  const [message, setMessage] = useState('')
-  const sendMessage = async () => {
-    setMessages((messages) => [
-      ...messages,
-      {role: 'user', content: message},
-      {role: 'assistant', content: ''}
-  ])
+ const [prof, setProf] = useState({
+  professor: "",
+  stars: "",
+  subject: "",
+  review: "",
+ });
+ const [dialogOpen, setDialogOpen] = useState(false);
 
-  const response = fetch('/api/chat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify([...messages, {role: 'user', content: message}])
-  }).then(async (res) => {
-    const reader = res.body.getReader()
-    const decoder = new TextDecoder()
-    let result = ''
-    return reader.read().then(function processText({done, value}) {
-      if (done){
-        return result
-      }
-      const text = decoder.decode(value || new Uint8Array(), {stream: true})
-      setMessages((messages) => {
-        let lastMessage = messages[messages.length - 1]
-        let otherMessages = messages.slice(0, messages.length - 1)
-        return [
-          ...otherMessages, 
-          {...lastMessage, content: lastMessage.content + text}
-        ]
-      })
+ const handleOpen = () => setDialogOpen(true);
+ const handleClose = () => setDialogOpen(false);
 
-      return reader.read().then(processText)
-    })
-  })
-  setMessage('')
-  }
+ const saveProfessor = () => {
+  console.log(prof);
 
-  return (
-    <Box width='100vw' height='100vh' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-      <Stack direction='column' width='500px' height='700px' border='1px solid black' p={2} spacing={3}>
-        <Stack direction='column' spacing={2} flexGrow={1}  overflow={'auto'} maxHeight={'100%'}>
-        {messages.map((message, index) => (
-          <Box key={index} display='flex' justifyContent={message.role === 'assistant' ? "flex-start" : "flex-end"}>
-            <Box 
-            bgcolor={message.role === 'assistant' ? "primary.main" : "secondary.main"}
-            color="white"
-            borderRadius={16}
-            p={3}
-            >
-              {message.content}
+  // input: url
+  // output: ?
+  // storage: professor data
+ };
+
+ return (
+  <Box width="100vw" height="100vh">
+   <AppBar position="static">
+    <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+     <Box>
+      <Button color="inherit" href="/">
+       <Typography variant="h6">NYUSH Rate My Professor</Typography>
+      </Button>
+     </Box>
+     <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+      <Box>
+       <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        onClick={handleOpen}
+       >
+        Add Professor
+       </Button>
+       <Dialog open={dialogOpen} onClose={handleClose}>
+        <DialogTitle>Add Professor</DialogTitle>
+        <DialogContent>
+         <DialogContentText>
+          Please enter a review for your professor:
+         </DialogContentText>
+         <TextField
+          autoFocus
+          margin="dense"
+          label="Professor Name"
+          type="text"
+          fullWidth
+          value={prof.professor}
+          onChange={(e) => setProf({ ...prof, professor: e.target.value })}
+         />
+
+         <TextField
+          autoFocus
+          margin="dense"
+          label="Subject"
+          type="text"
+          fullWidth
+          value={prof.subject}
+          onChange={(e) => setProf({ ...prof, subject: e.target.value })}
+         />
+
+         <TextField
+          autoFocus
+          margin="dense"
+          label="Stars"
+          type="text"
+          fullWidth
+          value={prof.stars}
+          onChange={(e) => setProf({ ...prof, stars: e.target.value })}
+         />
+
+         <TextField
+          autoFocus
+          margin="dense"
+          label="Reviews"
+          type="text"
+          fullWidth
+          value={prof.review}
+          onChange={(e) => setProf({ ...prof, review: e.target.value })}
+         />
+        </DialogContent>
+        <DialogActions>
+         <Button onClick={handleClose}>Cancel</Button>
+         <Button onClick={saveProfessor} color="secondary">
+          Save
+         </Button>
+        </DialogActions>
+       </Dialog>
+      </Box>
+      {/* <SignedOut>
+                <Button color='inherit' href='/sign-in'>Login</Button>
+                <Button color='inherit' href='/sign-up'>Sign Up</Button>
+            </SignedOut>
+            <SignedIn>
+            <Box>
+                <Button color='inherit' href='/generate'><AutoAwesomeIcon fontSize="medium"/></Button>
+                <Button color='inherit' href='/flashcards'><FolderIcon fontSize="medium"/></Button>  
             </Box>
-          </Box>
-        ))}
-        </Stack>
-        <Stack direction='row' spacing={2}>
-          <TextField label='message' fullWidth value={message} onChange={(e)=>{setMessage(e.target.value)}}/>
-          <Button variant='contained' onClick={sendMessage}>Send</Button>
-        </Stack>
-      </Stack>
-    </Box>
-  );
+            <UserButton/>
+            </SignedIn> */}
+     </Box>
+    </Toolbar>
+   </AppBar>
+   <Chatbot />
+  </Box>
+ );
 }
