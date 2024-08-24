@@ -1,0 +1,125 @@
+{
+    "reviews": [
+      {
+        "professor": "Dr. Smith",
+        "subject": "Computer Science",
+        "stars": 4,
+        "review": "Dr. Smith is very knowledgeable and explains concepts clearly."
+      },
+      {
+        "professor": "Prof. Johnson",
+        "subject": "History",
+        "stars": 5,
+        "review": "Prof. Johnson makes history come alive with engaging lectures."
+      },
+      {
+        "professor": "Dr. Lee",
+        "subject": "Mathematics",
+        "stars": 3,
+        "review": "Dr. Lee is helpful during office hours but lectures can be a bit fast-paced."
+      },
+      {
+        "professor": "Dr. Brown",
+        "subject": "Physics",
+        "stars": 2,
+        "review": "Dr. Brown is brilliant but often difficult to follow."
+      },
+      {
+        "professor": "Prof. Davis",
+        "subject": "Philosophy",
+        "stars": 5,
+        "review": "Prof. Davis challenges students to think deeply and critically."
+      },
+      {
+        "professor": "Dr. Wilson",
+        "subject": "Chemistry",
+        "stars": 3,
+        "review": "Dr. Wilson's labs are well-organized, but lectures are a bit dry."
+      },
+      {
+        "professor": "Prof. Miller",
+        "subject": "Economics",
+        "stars": 4,
+        "review": "Prof. Miller explains economic concepts in a very practical way."
+      },
+      {
+        "professor": "Dr. Martinez",
+        "subject": "Biology",
+        "stars": 5,
+        "review": "Dr. Martinez is passionate about biology and it shows in her teaching."
+      },
+      {
+        "professor": "Prof. Anderson",
+        "subject": "English Literature",
+        "stars": 4,
+        "review": "Prof. Anderson provides great feedback on essays and encourages discussion."
+      },
+      {
+        "professor": "Dr. Thomas",
+        "subject": "Political Science",
+        "stars": 2,
+        "review": "Dr. Thomas's lectures are informative but often lack engagement."
+      },
+      {
+        "professor": "Prof. Taylor",
+        "subject": "Sociology",
+        "stars": 4,
+        "review": "Prof. Taylor connects sociological theories to real-world examples."
+      },
+      {
+        "professor": "Dr. White",
+        "subject": "Art History",
+        "stars": 5,
+        "review": "Dr. White's enthusiasm for art is contagious."
+      },
+      {
+        "professor": "Prof. Harris",
+        "subject": "Psychology",
+        "stars": 3,
+        "review": "Prof. Harris provides a lot of reading material but class discussions are insightful."
+      },
+      {
+        "professor": "Dr. Martin",
+        "subject": "Geography",
+        "stars": 4,
+        "review": "Dr. Martin uses interactive maps and tools that make the class enjoyable."
+      },
+      {
+        "professor": "Prof. Thompson",
+        "subject": "Anthropology",
+        "stars": 5,
+        "review": "Prof. Thompson brings in guest speakers that enrich the learning experience."
+      },
+      {
+        "professor": "Dr. Garcia",
+        "subject": "Environmental Science",
+        "stars": 3,
+        "review": "Dr. Garcia's course is challenging but rewarding if you put in the effort."
+      },
+      {
+        "professor": "Prof. Martinez",
+        "subject": "Statistics",
+        "stars": 4,
+        "review": "Prof. Martinez makes complex statistical concepts easier to understand."
+      },
+      {
+        "professor": "Dr. Clark",
+        "subject": "Engineering",
+        "stars": 5,
+        "review": "Dr. Clark is an excellent mentor and offers valuable career advice."
+      },
+      {
+        "professor": "Prof. Lewis",
+        "subject": "Business Administration",
+        "stars": 4,
+        "review": "Prof. Lewis uses case studies that are highly relevant to current industry trends."
+      },
+      {
+        "professor": "Dr. Robinson",
+        "subject": "Music Theory",
+        "stars": 2,
+        "review": "Dr. Robinson is very talented but the course structure is a bit disorganized."
+      }
+    ]
+  }
+  
