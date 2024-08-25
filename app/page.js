@@ -52,14 +52,6 @@ export default function Home() {
             sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
           >
             <Box>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={handleOpen}
-              >
-                Add Professor
-              </Button>
               <Dialog open={dialogOpen} onClose={handleClose}>
                 <DialogTitle>Add Professor</DialogTitle>
                 <DialogContent>
@@ -131,6 +123,14 @@ export default function Home() {
               </Button>
             </SignedOut>
             <SignedIn>
+              <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={handleOpen}
+                >
+                Add Professor
+              </Button>
               <UserButton />
             </SignedIn>
           </Box>
