@@ -1,3 +1,4 @@
+'use client'
 import { Box, Button } from "@mui/material";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { useState } from "react";
