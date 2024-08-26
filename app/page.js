@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import Chatbot from "./components/chatbot/page";
 import ProSidebar from "./components/Sidebar/page";
 import Topbar from "./components/Topbar/page";
 
