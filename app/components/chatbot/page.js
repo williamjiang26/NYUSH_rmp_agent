@@ -8,11 +8,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import AddProfessor from "../addProfessor/page";
 export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I am the Rate My Professor assistant how may i help you",
+      content: "Hi! I am the NYU SH Rate My Professor assistant how may I help you?",
     },
   ]);
   const [message, setMessage] = useState("");
@@ -57,17 +58,16 @@ export default function Chatbot() {
 
   return (
     <Box
-      width="100vw"
-      height="100vh"
       display="flex"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      m='20px'
     >
       <Stack
         direction="column"
         width="500px"
-        height="700px"
+        height="600px"
         border="1px solid black"
         p={2}
         spacing={3}
@@ -114,6 +114,7 @@ export default function Chatbot() {
           <Button variant="contained" onClick={sendMessage}>
             Send
           </Button>
+          <AddProfessor/>
         </Stack>
       </Stack>
     </Box>
