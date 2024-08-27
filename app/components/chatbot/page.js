@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Box,
   Stack,
@@ -14,7 +14,8 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I am the NYU SH Rate My Professor assistant how may I help you?",
+      content:
+        "Hi! I am the NYU SH Rate My Professor assistant how may I help you?",
     },
   ]);
   const [message, setMessage] = useState("");
@@ -63,7 +64,7 @@ export default function Chatbot() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      m='20px'
+      m="20px"
     >
       <Stack
         direction="column"
@@ -112,10 +113,16 @@ export default function Chatbot() {
               setMessage(e.target.value);
             }}
           />
-          <Button variant="contained" onClick={sendMessage}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#56068B",
+            }}
+            onClick={sendMessage}
+          >
             Send
           </Button>
-          <AddProfessor/>
+          <AddProfessor />
         </Stack>
       </Stack>
     </Box>

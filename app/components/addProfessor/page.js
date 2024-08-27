@@ -82,6 +82,15 @@ const AddProfessor = () => {
             value={prof.review}
             onChange={(e) => setProf({ ...prof, review: e.target.value })}
           />
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Enter a Rate My Professor Link"
+            type="text"
+            fullWidth
+            value={prof.review}
+            onChange={(e) => setProf({ ...prof, review: e.target.value })}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
@@ -95,6 +104,9 @@ const AddProfessor = () => {
         color="primary"
         fullWidth
         onClick={handleOpen}
+        sx={{
+          backgroundColor: "#56068B",
+        }}
       >
         Add Professor
       </Button>
