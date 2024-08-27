@@ -10,13 +10,13 @@ const ProSidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Box sx={{ height: "100vh", backgroundColor: "#" }}>
-      <Sidebar collapsed={collapsed} collapsedWidth="80px" width="150px" backgroundColor= "#1876D2">
+      <Sidebar collapsed={collapsed} collapsedWidth="80px" width="150px" >
         <Menu
           menuItemStyles={{
             button: ({active, disabled }) => {
               // only apply styles on first level elements of the tree
                 return {
-                  color: disabled ? "#1876D2" : "#ffffff",
+                  color: disabled ? "#1876D2" : "#56068B",
                   backgroundColor: active ? "#1876D2" : undefined,
                 };
             },

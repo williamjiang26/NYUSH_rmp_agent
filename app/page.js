@@ -22,10 +22,12 @@ export default function Home() {
   return (
     <Box width="100vw" height="100vh">
       <Topbar />
-      <Stack>
-      <ProSidebar/>
-      </Stack>
-      
+      <Box display="flex" >
+        <ProSidebar />
+        <Box width="100vw" justifyContent="center" flexDirection='row' alignItems='center' m="20px" >
+          Dashboard
+        </Box>
+      </Box>
     </Box>
   );
 }

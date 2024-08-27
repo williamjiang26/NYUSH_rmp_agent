@@ -17,8 +17,8 @@ import { useUser } from "@clerk/nextjs";
 import { SignedOut, UserButton, SignedIn } from "@clerk/nextjs";
 const Topbar = () => {
   return (
-    <AppBar position="static">
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+    <AppBar position="static" >
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", backgroundColor:'#ffffff', color:"#56068B" }}>
         <Box>
           <Button color="inherit" href="/">
             <Typography variant="h6">NYUSH Rate My Professor</Typography>
