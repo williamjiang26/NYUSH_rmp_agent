@@ -7,11 +7,13 @@ const Chat = () => {
   return (
     <Box width="100vw" height="100vh">
       <Topbar />
-      <Box display='flex'>
+      <Box display="flex" >
         <ProSidebar />
-        <Chatbot />  
+        <Box width="100vw" justifyContent="center" flexDirection='row' alignItems='center'>
+          <Chatbot />
+        </Box>
       </Box>
     </Box>
   );
 };
-export default Chat
+export default Chat;
