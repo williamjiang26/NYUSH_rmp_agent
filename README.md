@@ -29,18 +29,18 @@ The application uses the following technologies:
 Here are the data models used in the application:
 
 ### **Professor**
-```json
+```javascript
 {
-  "professor_id": String, // Unique identifier for the professor
-  "name": String,         // Name of the professor
-  "subject": String,      // Subject the professor teaches
-  "average_rating": Number, // Average rating of the professor
+  "professor_id": str, // Unique identifier for the professor
+  "name": str,         // Name of the professor
+  "subject": str,      // Subject the professor teaches
+  "average_rating": int, // Average rating of the professor
   "reviews": [
     {
-      "user_id": String,    // The user who left the review
-      "rating": Number,     // Rating from 1 to 5
-      "comment": String,    // Review text
-      "date": Date          // Date the review was submitted
+      "user_id": str,    // The user who left the review
+      "rating": int,     // Rating from 1 to 5
+      "comment": str,    // Review text
+      "date": date          // Date the review was submitted
     }
   ]
 }
