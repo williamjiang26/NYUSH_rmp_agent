@@ -4,22 +4,23 @@ import {
   Stack,
   TextField,
   Button,
-  AppBar,
-  Toolbar,
   Typography,
+  Paper,
 } from "@mui/material";
 import { useState } from "react";
 import AddProfessor from "../addProfessor/page";
+
 export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content:
-        "Hi! I am the NYU SH Rate My Professor assistant how may I help you?",
+      content: "Hi! I am the NYUSH Rate My Professor assistant. How may I help you?",
     },
   ]);
   const [message, setMessage] = useState("");
+
   const sendMessage = async () => {
+    if (!message.trim()) return;
     setMessages((messages) => [
       ...messages,
       { role: "user", content: message },
@@ -28,30 +29,20 @@ export default function Chatbot() {
 
     const response = fetch("/api/chat", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify([...messages, { role: "user", content: message }]),
     }).then(async (res) => {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let result = "";
       return reader.read().then(function processText({ done, value }) {
-        if (done) {
-          return result;
-        }
-        const text = decoder.decode(value || new Uint8Array(), {
-          stream: true,
-        });
+        if (done) return result;
+        const text = decoder.decode(value || new Uint8Array(), { stream: true });
         setMessages((messages) => {
           let lastMessage = messages[messages.length - 1];
           let otherMessages = messages.slice(0, messages.length - 1);
-          return [
-            ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text },
-          ];
+          return [...otherMessages, { ...lastMessage, content: lastMessage.content + text }];
         });
-
         return reader.read().then(processText);
       });
     });
@@ -59,72 +50,48 @@ export default function Chatbot() {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      m="20px"
-    >
-      <Stack
-        direction="column"
-        width="500px"
-        height="600px"
-        border="1px solid black"
-        p={2}
-        spacing={3}
-      >
-        <Stack
-          direction="column"
-          spacing={2}
-          flexGrow={1}
-          overflow={"auto"}
-          maxHeight={"100%"}
-        >
-          {messages.map((message, index) => (
-            <Box
-              key={index}
-              display="flex"
-              justifyContent={
-                message.role === "assistant" ? "flex-start" : "flex-end"
-              }
-            >
+    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh" p={2}>
+      <Paper elevation={4} sx={{ width: "90%", maxWidth: "500px", borderRadius: "16px", p: 3, boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)" }}>
+        <Typography variant="h5" fontWeight="bold" textAlign="center" mb={2}>
+          Chat with Assistant
+        </Typography>
+        <Stack spacing={2} height={"500px"} overflow="hidden">
+          <Box flexGrow={1} overflow="auto" p={1} sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {messages.map((message, index) => (
               <Box
-                bgcolor={
-                  message.role === "assistant"
-                    ? "primary.main"
-                    : "secondary.main"
-                }
-                color="white"
-                borderRadius={16}
-                p={3}
+                key={index}
+                alignSelf={message.role === "assistant" ? "flex-start" : "flex-end"}
+                bgcolor={message.role === "assistant" ? "#f5f5f5" : "#56068B"}
+                color={message.role === "assistant" ? "black" : "white"}
+                borderRadius={2}
+                p={2}
+                maxWidth="80%"
+                sx={{ boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" }}
               >
                 {message.content}
               </Box>
-            </Box>
-          ))}
+            ))}
+          </Box>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <TextField
+              label="Type a message..."
+              fullWidth
+              variant="outlined"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              sx={{ borderRadius: "8px" }}
+            />
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "#56068B", color: "white", borderRadius: "8px", px: 3 }}
+              onClick={sendMessage}
+            >
+              Send
+            </Button>
+            <AddProfessor />
+          </Stack>
         </Stack>
-        <Stack direction="row" spacing={2}>
-          <TextField
-            label="message"
-            fullWidth
-            value={message}
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-          />
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#56068B",
-            }}
-            onClick={sendMessage}
-          >
-            Send
-          </Button>
-          <AddProfessor />
-        </Stack>
-      </Stack>
+      </Paper>
     </Box>
   );
 }

@@ -32,38 +32,66 @@ const Topbar = () => {
           </Button>
         </Box>
         <Box
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "5px",
+          }}
         >
           <SignedOut>
-            <Button
-              color="inherit"
-              href="/sign-in"
-              sx={{
-                backgroundColor: "transparent", // Default background color
-                "&:hover": {
-                  backgroundColor: "#56068B",
-                  color: "#ffffff" // Hover background color
-                },
-                transition: "background-color 0.3s ease", // Smooth transition
-              }}
-            >
-              Login
-            </Button>
-            <Button
-              color="inherit"
-              href="/sign-up"
-              sx={{
-                backgroundColor: "transparent", // Default background color
-                "&:hover": {
-                  backgroundColor: "#56068B", // Hover background color
-                  color: "#ffffff"
-                },
-                transition: "background-color 0.3s ease", // Smooth transition
-              }}
-            >
-              Sign Up
-            </Button>
+            <Box sx={{ display: "flex", gap: "15px" }}>
+              <Button
+                variant="contained"
+                href="/sign-in"
+                sx={{
+                  backgroundColor: "#6A0DAD",
+                  color: "#ffffff",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  padding: "10px 20px",
+                  borderRadius: "8px",
+                  boxShadow: "0px 4px 10px rgba(106, 13, 173, 0.3)",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#56068B",
+                    boxShadow: "0px 6px 15px rgba(86, 6, 139, 0.4)",
+                  },
+                  "&:active": {
+                    transform: "scale(0.96)",
+                  },
+                }}
+              >
+                Log In
+              </Button>
+
+              <Button
+                variant="contained"
+                href="/sign-up"
+                sx={{
+                  backgroundColor: "#6A0DAD",
+                  color: "#ffffff",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  padding: "10px 20px",
+                  borderRadius: "8px",
+                  boxShadow: "0px 4px 10px rgba(106, 13, 173, 0.3)",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#56068B",
+                    boxShadow: "0px 6px 15px rgba(86, 6, 139, 0.4)",
+                  },
+                  "&:active": {
+                    transform: "scale(0.96)",
+                  },
+                }}
+              >
+                Sign Up
+              </Button>
+            </Box>
           </SignedOut>
+
           <SignedIn>
             <UserButton />
           </SignedIn>

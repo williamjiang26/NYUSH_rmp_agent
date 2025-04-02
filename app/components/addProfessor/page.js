@@ -1,19 +1,19 @@
-'use client'
+"use client";
 import {
-  AppBar,
   Box,
-  TextField,
   Button,
   Dialog,
   DialogActions,
   DialogTitle,
   DialogContent,
   DialogContentText,
-  Toolbar,
+  TextField,
+  MenuItem,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
+
 const AddProfessor = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [prof, setProf] = useState({
@@ -21,96 +21,119 @@ const AddProfessor = () => {
     stars: "",
     subject: "",
     review: "",
+    link: "",
   });
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleOpen = () => setDialogOpen(true);
   const handleClose = () => setDialogOpen(false);
+  const handleChange = (e) =>
+    setProf({ ...prof, [e.target.name]: e.target.value });
 
   const saveProfessor = () => {
     console.log(prof);
-
-    // input: url
-    // output: ?
-    // storage: professor data
+    handleClose();
   };
 
   return (
     <Box>
-      <Dialog open={dialogOpen} onClose={handleClose}>
-        <DialogTitle>Add Professor</DialogTitle>
+      <Dialog open={dialogOpen} onClose={handleClose} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ textAlign: "center", fontWeight: "bold" }}>
+          Add Professor
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Please enter a review for your professor:
+          <DialogContentText textAlign="center" mb={2}>
+            Please enter details about your professor:
           </DialogContentText>
           <TextField
-            autoFocus
-            margin="dense"
             label="Professor Name"
-            type="text"
+            name="professor"
             fullWidth
+            variant="outlined"
             value={prof.professor}
-            onChange={(e) => setProf({ ...prof, professor: e.target.value })}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
           />
-
           <TextField
-            autoFocus
-            margin="dense"
             label="Subject"
-            type="text"
+            name="subject"
             fullWidth
+            variant="outlined"
             value={prof.subject}
-            onChange={(e) => setProf({ ...prof, subject: e.target.value })}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
           />
-
           <TextField
-            autoFocus
-            margin="dense"
+            select
             label="Stars"
-            type="text"
+            name="stars"
             fullWidth
+            variant="outlined"
             value={prof.stars}
-            onChange={(e) => setProf({ ...prof, stars: e.target.value })}
-          />
-
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          >
+            {[1, 2, 3, 4, 5].map((star) => (
+              <MenuItem key={star} value={star}>{`${star} Stars`}</MenuItem>
+            ))}
+          </TextField>
           <TextField
-            autoFocus
-            margin="dense"
-            label="Reviews"
-            type="text"
+            label="Review"
+            name="review"
             fullWidth
+            variant="outlined"
+            multiline
+            rows={3}
             value={prof.review}
-            onChange={(e) => setProf({ ...prof, review: e.target.value })}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
           />
           <TextField
-            autoFocus
-            margin="dense"
-            label="Enter a Rate My Professor Link"
-            type="text"
+            label="Rate My Professor Link"
+            name="link"
             fullWidth
-            value={prof.review}
-            onChange={(e) => setProf({ ...prof, review: e.target.value })}
+            variant="outlined"
+            value={prof.link}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={saveProfessor} color="secondary">
+        <DialogActions sx={{ justifyContent: "center" }}>
+          <Button
+            onClick={handleClose}
+            variant="outlined"
+            sx={{ borderRadius: "8px" }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={saveProfessor}
+            variant="contained"
+            sx={{
+              backgroundColor: "#56068B",
+              color: "white",
+              borderRadius: "8px",
+            }}
+          >
             Save
           </Button>
         </DialogActions>
       </Dialog>
       <Button
         variant="contained"
-        color="primary"
-        fullWidth
         onClick={handleOpen}
         sx={{
           backgroundColor: "#56068B",
+          color: "white",
+          borderRadius: "8px",
+          px: 3,
+          textTransform: "none",
         }}
       >
-        Add Professor
+        ADD
       </Button>
     </Box>
   );
 };
+
 export default AddProfessor;
