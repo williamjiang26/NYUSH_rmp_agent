@@ -1,7 +1,7 @@
 # NYUSH Professor Chat Assistant
 
 ## Goal
-The **NYUSH Professor Chat Assistant** is a web application designed to help NYU Shanghai students find professor recommendations. Users can interact with a chatbot to ask for personalized professor suggestions based on their preferences, such as workload, group projects, and more. The assistant allows students to rate professors, read reviews, and easily navigate the platform to get their desired recommendations.
+The **NYUSH Professor Chat Assistant** is a web application designed to help NYU Shanghai students find professor recommendations. Users can interact with a chatbot to ask for personalized professor suggestions based on their preferences, such as workload, group projects, and more. NYUSH students can utilize this tool tailored to NYUSH Professors and add their own reviews for a more robust knowledge base. 
 
 ## Tech Stack
 The application uses the following technologies:
@@ -18,6 +18,8 @@ The application uses the following technologies:
   - OpenAI GPT-3 for chatbot capabilities
   - MongoDB (for storing user reviews and professor data)
   - REST API for communication between frontend and backend
+  - Python
+  - Pinecone
 
 - **Other Technologies:**
   - Next.js routing
