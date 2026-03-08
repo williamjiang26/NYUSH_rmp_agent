@@ -11,6 +11,8 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import AddProfessor from "../addProfessor/page";
 import remarkGfm from "remark-gfm";
+//
+import rehypeRaw from "rehype-raw";
 
 export default function Chatbot() {
   const [messages, setMessages] = useState([
@@ -109,7 +111,10 @@ export default function Chatbot() {
               }}
             >
               {message.role === "assistant" ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
+                >
                   {message.content}
                 </ReactMarkdown>
               ) : (

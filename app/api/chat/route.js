@@ -72,8 +72,8 @@ export async function POST(req) {
       stream: true,
     },
   });
- 
-   // completion is a array of tokens and it converts them into text stringing them into a message
+
+  // completion is a array of tokens and it converts them into text stringing them into a message
   const stream = new ReadableStream({
     async start(controller) {
       const encoder = new TextEncoder();
@@ -92,6 +92,5 @@ export async function POST(req) {
       }
     },
   });
-  console.log("🚀 ~ POST ~ stream:", stream)
   return new NextResponse(stream);
 }
