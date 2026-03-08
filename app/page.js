@@ -4,9 +4,9 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Topbar from "./components/Topbar/page";
-import ChatIcon from "@mui/icons-material/SmartToy"; // Mascot Icon
 
 export default function Home() {
   const router = useRouter();
@@ -57,7 +57,7 @@ export default function Home() {
           },
         }}
       >
-        <img
+        <Image
           src="https://shanghai.nyu.edu/sites/default/files/media/03.gif"
           alt="Mascot"
           style={{

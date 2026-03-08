@@ -3,6 +3,7 @@ import { Box, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import Topbar from "../components/Topbar/page";
 import Chatbot from "../components/chatbot/page";
+import Image from "next/image";
 
 const Chat = () => {
   const router = useRouter();
@@ -10,15 +11,16 @@ const Chat = () => {
   return (
     <Box width="100vw" height="100vh">
       <Topbar />
-      <Box display="flex">
-        <Box
-          width="100vw"
-          justifyContent="center"
-          flexDirection="row"
-          alignItems="center"
-        >
-          <Chatbot />
-        </Box>
+      <Box
+        component="main"
+        flexGrow={1}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        overflow="hidden"
+        height="100vh"
+      >
+        <Chatbot />
       </Box>
 
       {/* Floating Mascot Button (Navigates to Home) */}
@@ -41,7 +43,7 @@ const Chat = () => {
           },
         }}
       >
-        <img
+        <Image
           src="https://shanghai.nyu.edu/sites/default/files/media/03.gif"
           alt="Mascot"
           style={{

@@ -11,7 +11,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
 const AddProfessor = () => {
@@ -21,17 +21,22 @@ const AddProfessor = () => {
     stars: "",
     subject: "",
     review: "",
-    link: "",
   });
   const [dialogOpen, setDialogOpen] = useState(false);
-
+  useEffect(() => {
+    console.log("Current Prof State:", prof);
+  }, [prof]);
   const handleOpen = () => setDialogOpen(true);
   const handleClose = () => setDialogOpen(false);
   const handleChange = (e) =>
     setProf({ ...prof, [e.target.name]: e.target.value });
 
-  const saveProfessor = () => {
-    console.log(prof);
+  const saveProfessor = async () => {
+    const response = fetch("/api/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(prof),
+    });
     handleClose();
   };
 
@@ -88,7 +93,7 @@ const AddProfessor = () => {
             onChange={handleChange}
             sx={{ mb: 2 }}
           />
-          <TextField
+          {/* <TextField
             label="Rate My Professor Link"
             name="link"
             fullWidth
@@ -96,7 +101,7 @@ const AddProfessor = () => {
             value={prof.link}
             onChange={handleChange}
             sx={{ mb: 2 }}
-          />
+          /> */}
         </DialogContent>
         <DialogActions sx={{ justifyContent: "center" }}>
           <Button

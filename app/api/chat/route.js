@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Pinecone } from "@pinecone-database/pinecone";
-import OpenAI from "openai";
+import { OpenRouter } from "@openrouter/sdk";
 
 const systemPrompt = `
 You are an intelligent assistant specialized in helping students find the most 
@@ -17,19 +17,28 @@ decision."
 `;
 
 export async function POST(req) {
+  // entire message
   const data = await req.json();
+  // initialize clients
   const pc = new Pinecone({
     apiKey: process.env.PINECONE_API_KEY,
   });
   const index = pc.index("rag").namespace("ns1");
-  const openai = new OpenAI();
-
-  const text = data[data.length - 1].content;
-  const embedding = await openai.embeddings.create({
-    model: "text-embedding-3-small",
-    input: text,
-    encoding_format: "float",
+  const openrouter = new OpenRouter({
+    apiKey: process.env.OPENROUTER_API_KEY,
   });
+  // users last message
+  const text = data[data.length - 1].content;
+  // I am creating an embedding to vectorize the last user message
+  const embedding = await openrouter.embeddings.generate({
+    requestBody: {
+      model: "nvidia/llama-nemotron-embed-vl-1b-v2:free",
+      input: text,
+      encoding_format: "float",
+    },
+  });
+
+  // given the value of the user message I am getting the top k reviews from the database and returning it as a string
   const results = await index.query({
     topK: 3,
     includeMetadata: true,
@@ -45,20 +54,26 @@ export async function POST(req) {
         \n\n
         `;
   });
-
   const lastMessage = data[data.length - 1];
   const lastMessageContent = lastMessage.content + resultString;
+  // console.log("🚀 ~ POST ~ lastMessage:", lastMessage)
+  // console.log("🚀 ~ POST ~ lastMessageContent:", lastMessageContent)
   const lastDataWithoutLastMessage = data.slice(0, data.length - 1);
-  const completion = await openai.chat.completions.create({
-    messages: [
-      { role: "system", content: systemPrompt },
-      ...lastDataWithoutLastMessage,
-      { role: "user", content: lastMessageContent },
-    ],
-    model: "gpt-4o-mini",
-    stream: true,
+  // console.log("🚀 ~ POST ~ lastDataWithoutLastMessage:", lastDataWithoutLastMessage)
+  // i am giving the system my message plus the returned results and it responds with a tailored message combining my query and the results
+  const completion = await openrouter.chat.send({
+    chatGenerationParams: {
+      model: "nvidia/nemotron-3-nano-30b-a3b:free",
+      messages: [
+        { role: "system", content: systemPrompt },
+        ...lastDataWithoutLastMessage,
+        { role: "user", content: lastMessageContent },
+      ],
+      stream: true,
+    },
   });
-
+ 
+   // completion is a array of tokens and it converts them into text stringing them into a message
   const stream = new ReadableStream({
     async start(controller) {
       const encoder = new TextEncoder();
@@ -77,5 +92,6 @@ export async function POST(req) {
       }
     },
   });
+  console.log("🚀 ~ POST ~ stream:", stream)
   return new NextResponse(stream);
 }
