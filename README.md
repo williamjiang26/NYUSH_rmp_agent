@@ -1,8 +1,8 @@
-# NYUSH Professor Chat Assistant
+# NYUSH Rate My Professor Assistant
 
 ## Goal
 
-The **NYUSH Rate My Professor Assistant** is a web application designed to help NYU Shanghai students find professor recommendations. Users can interact with a chatbot to ask for personalized professor suggestions based on their teaching preferences, such as workload, assignment types, and more. Students can add their own reviews for a more robust knowledge base.
+**NYUSH Rate My Professor Assistant** is a web application designed to help NYU Shanghai students find professor recommendations. Users can interact with a chatbot to ask for personalized professor suggestions based on their teaching preferences, such as workload, assignment types, and more. Students can add their own reviews for a more robust knowledge base.
 
 ## Tech Stack
 
