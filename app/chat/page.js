@@ -45,11 +45,11 @@ const Chat = () => {
       >
         <Image
           src="https://shanghai.nyu.edu/sites/default/files/media/03.gif"
-          alt="Mascot"
+          alt="Mascot Logo"
+          fill
           style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "50%", // Optional: if you want a round shape
+            objectFit: "cover",
+            borderRadius: "50%",
           }}
         />
       </IconButton>

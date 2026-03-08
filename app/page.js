@@ -1,9 +1,5 @@
 "use client";
-import {
-  Box,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Topbar from "./components/Topbar/page";
@@ -59,11 +55,11 @@ export default function Home() {
       >
         <Image
           src="https://shanghai.nyu.edu/sites/default/files/media/03.gif"
-          alt="Mascot"
+          alt="Mascot Logo"
+          fill
           style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "50%", // Optional: if you want a round shape
+            objectFit: "cover", // Prevents stretching
+            borderRadius: "50%", // Makes it a circle
           }}
         />
       </IconButton>
