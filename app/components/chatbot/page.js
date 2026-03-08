@@ -109,9 +109,7 @@ export default function Chatbot() {
               }}
             >
               {message.role === "assistant" ? (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                >
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {message.content}
                 </ReactMarkdown>
               ) : (
@@ -120,7 +118,13 @@ export default function Chatbot() {
             </Box>
           ))}
         </Box>
-        <Stack direction="row" spacing={2} alignItems="center" my={2}>
+        <Stack
+          display="flex"
+          direction="row"
+          spacing={2}
+          alignItems="center"
+          mb={2}
+        >
           <TextField
             label="Type a message..."
             fullWidth
