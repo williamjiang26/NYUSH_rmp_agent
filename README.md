@@ -40,7 +40,9 @@
 }
 ```
 
-## Future Features: 
-- [ ] service to put course schedule together
-- [ ] train custom model on user reviews and courses
-- [ ] demo and open project contributions
+
+
+## Features: 
+- [x] recommend professors through chat interface
+- [x] submit course reviews
+- [ ] create course schedule
